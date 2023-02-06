@@ -3,7 +3,9 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('main page')
+    template = 'posts/index.html'
+    return render(request, template)
+
 
 def group_posts(request, slug):
     return HttpResponse(f'Group {slug}')

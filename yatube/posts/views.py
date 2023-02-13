@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from .models import Post
 
 def index(request):
     template = 'posts/index.html'
-    title = 'Это главная страница проекта Yatube'
-    var_title = {
-        'title': title,
+
+    posts = Post.objects.order_by('-pub_date')[:10]
+    # В словаре context отправляем информацию в шаблон
+    context = {
+        'posts': posts,
     }
-    return render(request, template, var_title)
+    return render(request, template, context)
 
 
 def group_posts(request, slug):
